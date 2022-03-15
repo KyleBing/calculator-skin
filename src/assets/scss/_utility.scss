@@ -64,6 +64,7 @@
   @include transform(scaleY(.5))
 }
 
+
 /*
   Extension
 */
@@ -75,11 +76,24 @@
   user-select: none;
 }
 
-
+.btn-like{
+  cursor: pointer;
+  @extend .unselectable;
+  &:active{
+    @include transform(translateY(2px))
+  }
+}
 
 .link{
   &:hover{
 
   }
+}
+
+.text-right{
+  text-align: right;
+}
+.text-left{
+  text-align: left;
 }
 

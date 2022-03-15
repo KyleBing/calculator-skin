@@ -41,6 +41,7 @@ export default {
 }
 
 .equal{
+    padding: 0 10px;
     color: $text-comment;
 }
 

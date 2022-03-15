@@ -1,35 +1,51 @@
 <template>
-    <div class="equation mb-2">
-        <input @keydown.enter="calculate" placeholder="请输入算式" v-model="equation"/>
+    <div class="container">
+        <Display class="mb-2" :equation="equation" :result="result"/>
+        <div class="equation mb-2">
+            <input @keydown.enter="calculate" placeholder="请输入算式" v-model="equation"/>
+<!--            <div class="btn" @click="addResult">添加</div>-->
+        </div>
+<!--        <ResultList :resultList="resultList"/>-->
     </div>
-    <Display :equation="equation" :result="result"/>
-    <div>{{tip}}</div>
 </template>
 
 <script>
 
 import Display from "@/components/Display";
 import calculator from "advanced-calculator"
+import ResultList from "@/components/ResultList";
 
 export default {
     name: 'App',
-    components: { Display },
+    components: {ResultList, Display },
     data(){
         return {
             equation: '', // 算式
-            tip: '', // 提示
-            result: '', // 计算结果
+            result: '', // 计算结果,
+            resultList: [], // 计算结果保存列表
         }
     },
     methods: {
         calculate(){
-            let result = calculator.evaluate(this.equation)
-            if (typeof(result) === 'string' ){
-                this.result = '输入有误'
+            if (this.equation){ // 算式不为空
+                let result = calculator.evaluate(this.equation)
+                if (typeof(result) === 'string' ){
+                    this.result = '输入有误'
+                } else {
+                    this.result = String(result)
+                    // this.result = result.toFixed(2)
+                }
             } else {
-                this.result = result
-                // this.result = result.toFixed(2)
+
             }
+
+        },
+        addResult(){
+            this.resultList.unshift({
+                date: new Date(),
+                equation: this.equation,
+                result: this.result,
+            })
         }
     },
 }
@@ -38,19 +54,34 @@ export default {
 <style lang="scss" scoped>
 @import "src/assets/scss/gutter";
 @import "src/assets/scss/plugin";
+
+.container{
+    padding: 30px;
+}
+
 .equation{
     display: flex;
     align-items: center;
-    flex-flow: column nowrap;
+    justify-content: center;
+    flex-flow: row nowrap;
     input{
+        width: 100%;
+        display: block;
         text-align: center;
-        font-size: 40px;
+        font-size: 30px;
         padding: 10px 20px;
-        border: 1px solid $color-border;
-        @include border-radius(10px);
+        border: 3px solid $color-border;
+        @include border-radius(5px);
+        outline: none;
         &:focus{
             border-color: $color-border-highlight;
         }
     }
+}
+.btn{
+    @include border-radius(5px);
+    padding: 3px 5px;
+    border: 1px solid $color-border;
+    @extend .btn-like
 }
 </style>
