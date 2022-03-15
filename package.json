@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "advanced-calculator": "^1.1.0",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0"
   },
