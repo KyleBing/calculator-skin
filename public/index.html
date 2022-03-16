@@ -14,4 +14,14 @@
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>
+  <script>
+      setTimeout(() => {
+          if (!/^http:\/\/(a\.kylebing\.cn|localhost|192\.168\.\d{1,3}\.\d{1,3})/i.test(location.href)) {
+              let hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?b4b8d1e4561a36cd33d8c21fcc666e4b";
+              let s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+          }
+      }, 1000)
+  </script>
 </html>
