@@ -1,7 +1,7 @@
 <template>
     <ResultListItem :resultItem="item"
                     v-for="(item, index) in resultList" :key="index"
-                    @delete="$emit('delete', )"
+                    @delete="$emit('delete', index)"
     />
 </template>
 

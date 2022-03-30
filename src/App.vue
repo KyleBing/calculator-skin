@@ -3,9 +3,9 @@
         <Display class="mb-2" :equation="equation" :result="result"/>
         <div class="equation mb-2">
             <input @keydown.enter="calculate" placeholder="请输入算式" v-model="equation"/>
-<!--            <div class="btn" @click="addResult">添加</div>-->
+            <div class="btn" @click="addResult">添加</div>
         </div>
-<!--        <ResultList :resultList="resultList"/>-->
+        <ResultList :resultList="resultList" @delete="delete(index)"/>
     </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
     },
     methods: {
         calculate(){
+            this.equation = this.equation.replaceAll(/[xX]/g,'*')
             if (this.equation){ // 算式不为空
                 let result = calculator.evaluate(this.equation)
                 if (typeof(result) === 'string' ){
@@ -46,6 +47,9 @@ export default {
                 equation: this.equation,
                 result: this.result,
             })
+        },
+        delete(index){
+            this.resultList.splice(index ,1)
         }
     },
 }
