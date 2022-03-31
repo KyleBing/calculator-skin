@@ -6,7 +6,7 @@
 <!--            <Button type="add" :width="55" @click="addResult"/>-->
 <!--            <Button type="menu" :width="55" @click="calculate"/>-->
         </div>
-        <ResultList :resultList="resultList" @delete="deleteResultAt"/>
+        <ResultList :resultList="resultList" @edit="editResultAt" @delete="deleteResultAt"/>
         <Copyright/>
     </div>
 </template>
@@ -61,6 +61,12 @@ export default {
         // 删除 index 位置的记录
         deleteResultAt(index){
             this.resultList.splice(index ,1)
+        },
+
+        // 重新编辑 index 位置的算式
+        editResultAt(index){
+            let editResult = this.resultList[index]
+            this.equation = editResult.equation
         },
 
         // 验证算式是否可用

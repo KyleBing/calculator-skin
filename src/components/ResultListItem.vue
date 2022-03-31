@@ -6,7 +6,7 @@
             <div class="result">{{resultItem.result}}</div>
             <div class="operations">
                 <Button type="edit" @click="$emit('edit', index)"/>
-                <Button type="delete" @click="$emit('delete', index)"/>
+                <Button type="close" @click="$emit('delete', index)"/>
                 <Button class="clipboard" type="share" :dataClipboard="resultItem.result"/>
             </div>
         </div>

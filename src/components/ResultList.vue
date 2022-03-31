@@ -3,6 +3,7 @@
                     :index="index"
                     v-for="(item, index) in resultList" :key="index"
                     @delete="deleteResultAt(index)"
+                    @edit="editResultAt(index)"
     />
 </template>
 
@@ -21,6 +22,9 @@ export default {
     methods: {
         deleteResultAt(index){
             this.$emit('delete', index)
+        },
+        editResultAt(index){
+            this.$emit('edit', index)
         }
     }
 }
