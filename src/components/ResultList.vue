@@ -1,7 +1,8 @@
 <template>
     <ResultListItem :resultItem="item"
+                    :index="index"
                     v-for="(item, index) in resultList" :key="index"
-                    @delete="$emit('delete', index)"
+                    @delete="deleteResultAt(index)"
     />
 </template>
 
@@ -14,6 +15,9 @@ export default {
         resultList: []
     },
     methods: {
+        deleteResultAt(index){
+            this.$emit('delete', index)
+        }
     }
 }
 </script>

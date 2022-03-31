@@ -3,9 +3,9 @@
         <Display class="mb-2" :equation="equation" :result="result"/>
         <div class="equation mb-2">
             <input @keydown.enter="calculate" placeholder="请输入算式" v-model="equation"/>
-            <div class="btn" @click="addResult">添加</div>
+            <Button type="add" :width="55" @click="addResult"/>
         </div>
-        <ResultList :resultList="resultList" @delete="delete(index)"/>
+        <ResultList :resultList="resultList" @delete="deleteResultAt"/>
     </div>
 </template>
 
@@ -14,10 +14,11 @@
 import Display from "@/components/Display";
 import calculator from "advanced-calculator"
 import ResultList from "@/components/ResultList";
+import Button from "@/components/Button/Button";
 
 export default {
     name: 'App',
-    components: {ResultList, Display },
+    components: {Button, ResultList, Display },
     data(){
         return {
             equation: '', // 算式
@@ -42,13 +43,15 @@ export default {
 
         },
         addResult(){
-            this.resultList.unshift({
-                date: new Date(),
-                equation: this.equation,
-                result: this.result,
-            })
+            if (this.equation && this.result){
+                this.resultList.unshift({
+                    date: new Date(),
+                    equation: this.equation,
+                    result: this.result,
+                })
+            }
         },
-        delete(index){
+        deleteResultAt(index){
             this.resultList.splice(index ,1)
         }
     },
