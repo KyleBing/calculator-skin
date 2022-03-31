@@ -1,8 +1,10 @@
 <template>
     <div class="display">
         <div class="equation">{{equation}}</div>
-        <div class="equal">=</div>
-        <div class="result">{{result}}</div>
+        <div class="right">
+            <div class="equal">=</div>
+            <div class="result">{{result}}</div>
+        </div>
     </div>
 </template>
 
@@ -36,17 +38,22 @@ export default {
     color: $text-main;
 }
 
-.result{
-
-}
-
-.equal{
-    padding: 0 10px;
-    color: $text-comment;
-}
-
 .equation{
-
+    text-align: right;
+    flex-grow: 1;
+    padding-right: 50px;
 }
+.right{
+    width: 50%;
+    flex-shrink: 0;
+    display: flex;
+    .equal{
+        padding-right: 50px;
+        color: $text-comment;
+    }
+    .result{
+    }
+}
+
 
 </style>

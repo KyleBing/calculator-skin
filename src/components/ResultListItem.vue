@@ -15,7 +15,6 @@
 
 <script>
 import Button from "@/components/Button/Button";
-import ClipboardJS from "clipboard";
 export default {
     name: "ResultListItem",
     components: {Button},
@@ -57,12 +56,10 @@ export default {
             padding-right: 50px;
         }
         .result{
-
+            //flex-grow: 1;
         }
     }
 }
-
-
 
 .operations{
     margin-left: 20px;

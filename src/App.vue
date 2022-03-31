@@ -3,10 +3,11 @@
         <Display class="mb-2" :equation="equation" :result="result"/>
         <div class="equation mb-2">
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
-            <Button type="add" :width="55" @click="addResult"/>
-            <Button type="menu" :width="55" @click="calculate"/>
+<!--            <Button type="add" :width="55" @click="addResult"/>-->
+<!--            <Button type="menu" :width="55" @click="calculate"/>-->
         </div>
         <ResultList :resultList="resultList" @delete="deleteResultAt"/>
+        <Copyright/>
     </div>
 </template>
 
@@ -17,10 +18,11 @@ import calculator from "advanced-calculator"
 import ResultList from "@/components/ResultList";
 import Button from "@/components/Button/Button";
 import ClipboardJS from "clipboard";
+import Copyright from "@/components/Copyright";
 
 export default {
     name: 'App',
-    components: {Button, ResultList, Display },
+    components: {Copyright, Button, ResultList, Display },
     data(){
         return {
             equation: '', // 算式
@@ -29,6 +31,7 @@ export default {
         }
     },
     methods: {
+        // 计算结果
         calculate(){
             this.equation = this.equation.replaceAll(/[xX]/g,'*')
 
@@ -44,6 +47,7 @@ export default {
             }
 
         },
+        // 添加结果到结果集
         addResult(){
             if (this.equation && this.result && this.equationIsValid(this.equation)){
                 this.resultList.unshift({
@@ -54,13 +58,14 @@ export default {
                 })
             }
         },
+        // 删除 index 位置的记录
         deleteResultAt(index){
             this.resultList.splice(index ,1)
         },
 
         // 验证算式是否可用
         equationIsValid(equation){
-            return /^[\.\d].*\)?\d+ *$/i.test(equation)
+            return /^[\.\d].*\d+ *\)?$/i.test(equation)
         }
     },
     watch: {
@@ -71,9 +76,6 @@ export default {
             }
         }
     },
-
-
-
 
     mounted() {
         // 绑定剪贴板操作方法
@@ -87,7 +89,7 @@ export default {
         })
     },
 
-    beforeDestroy() {
+    beforeUnmount() {
         this.clipboard.destroy() // 销毁 clipboard 避免弹出多个复制成功提示框
     },
 
