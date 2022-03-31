@@ -3,8 +3,6 @@
         <Display class="mb-2" :equation="equation" :result="result"/>
         <div class="equation mb-2">
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
-<!--            <Button type="add" :width="55" @click="addResult"/>-->
-<!--            <Button type="menu" :width="55" @click="calculate"/>-->
         </div>
         <ResultList :resultList="resultList" @edit="editResultAt" @delete="deleteResultAt"/>
         <Copyright/>
@@ -34,18 +32,20 @@ export default {
         // 计算结果
         calculate(){
             this.equation = this.equation.replaceAll(/[xX]/g,'*')
-
-            console.log('---about to excute calculation: ', this.equation)
-            let result = calculator.evaluate(this.equation)
-            if (this.equation !== ''){
-                if (typeof(result) === 'string' ){
-                    this.result = '输入有误'
-                } else {
-                    this.result = String(result)
-                    // this.result = result.toFixed(2)
+            // console.log('---about to execute calculation: ', this.equation)
+            try {
+                let result = calculator.evaluate(this.equation)
+                if (this.equation !== ''){
+                    if (typeof(result) === 'string' ){
+                        this.result = '输入有误'
+                    } else {
+                        this.result = String(result)
+                        // this.result = result.toFixed(2)
+                    }
                 }
+            } catch (error) {
+                this.result = '输入有误'
             }
-
         },
         // 添加结果到结果集
         addResult(){
@@ -79,6 +79,9 @@ export default {
             if (this.equationIsValid(newValue)){
                 console.log('valid equation', newValue)
                 this.calculate()
+            }
+            if (newValue === ''){
+                this.result = ''
             }
         }
     },

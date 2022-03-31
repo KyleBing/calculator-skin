@@ -2,8 +2,8 @@
     <div class="display">
         <div class="equation">{{equation}}</div>
         <div class="right">
-            <div class="equal">=</div>
-            <div class="result">{{result}}</div>
+            <div class="equal" v-if="equation">=</div>
+            <div class="result" v-if="equation">{{result}}</div>
         </div>
     </div>
 </template>
@@ -28,6 +28,7 @@ export default {
 @import "src/assets/scss/plugin";
 
 .display{
+    height: 50px;
     flex-flow: row nowrap;
     align-items: center;
     display: flex;
