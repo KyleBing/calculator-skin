@@ -18,11 +18,6 @@ export default {
             default: 30
         }
     },
-    data(){
-        return{
-            icon: null
-        }
-    },
     mounted() {
 
     },

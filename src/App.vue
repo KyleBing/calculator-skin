@@ -2,8 +2,9 @@
     <div class="container">
         <Display class="mb-2" :equation="equation" :result="result"/>
         <div class="equation mb-2">
-            <input @keydown.enter="calculate" placeholder="请输入算式" v-model="equation"/>
+            <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
             <Button type="add" :width="55" @click="addResult"/>
+            <Button type="menu" :width="55" @click="calculate"/>
         </div>
         <ResultList :resultList="resultList" @delete="deleteResultAt"/>
     </div>
@@ -15,6 +16,7 @@ import Display from "@/components/Display";
 import calculator from "advanced-calculator"
 import ResultList from "@/components/ResultList";
 import Button from "@/components/Button/Button";
+import ClipboardJS from "clipboard";
 
 export default {
     name: 'App',
@@ -29,32 +31,66 @@ export default {
     methods: {
         calculate(){
             this.equation = this.equation.replaceAll(/[xX]/g,'*')
-            if (this.equation){ // 算式不为空
-                let result = calculator.evaluate(this.equation)
+
+            console.log('---about to excute calculation: ', this.equation)
+            let result = calculator.evaluate(this.equation)
+            if (this.equation !== ''){
                 if (typeof(result) === 'string' ){
                     this.result = '输入有误'
                 } else {
                     this.result = String(result)
                     // this.result = result.toFixed(2)
                 }
-            } else {
-
             }
 
         },
         addResult(){
-            if (this.equation && this.result){
+            if (this.equation && this.result && this.equationIsValid(this.equation)){
                 this.resultList.unshift({
                     date: new Date(),
-                    equation: this.equation,
+                    equation: this.equation.replaceAll(' ','').replaceAll(/([\+\-\(\)])/g, ' $1 '),
+                    // equation: this.equation.replaceAll(' ','').replaceAll(/([\+\-\/\*\(\)])/g, ' $1 '),
                     result: this.result,
                 })
             }
         },
         deleteResultAt(index){
             this.resultList.splice(index ,1)
+        },
+
+        // 验证算式是否可用
+        equationIsValid(equation){
+            return /^[\.\d].*\)?\d+ *$/i.test(equation)
         }
     },
+    watch: {
+        equation(newValue){
+            if (this.equationIsValid(newValue)){
+                console.log('valid equation', newValue)
+                this.calculate()
+            }
+        }
+    },
+
+
+
+
+    mounted() {
+        // 绑定剪贴板操作方法
+        this.clipboard = new ClipboardJS('.clipboard', {
+            text: function (trigger) {
+                return trigger.getAttribute('dataClipboard')
+            },
+        })
+        this.clipboard.on('success', ()=>{  // 还可以添加监听事件，如：复制成功后提示
+            console.log('copy success')
+        })
+    },
+
+    beforeDestroy() {
+        this.clipboard.destroy() // 销毁 clipboard 避免弹出多个复制成功提示框
+    },
+
 }
 </script>
 
@@ -63,6 +99,7 @@ export default {
 @import "src/assets/scss/plugin";
 
 .container{
+    font-family: Verdana;
     padding: 30px;
 }
 

@@ -12,8 +12,12 @@ export default {
     name: "ResultList",
     components: {ResultListItem},
     props: {
-        resultList: []
+        resultList: {
+            type: Array,
+            default: []
+        }
     },
+    emits: ['delete', 'edit'],
     methods: {
         deleteResultAt(index){
             this.$emit('delete', index)
