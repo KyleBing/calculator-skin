@@ -4,6 +4,10 @@
             <dt>作者：</dt>
             <dd><a href="https://kylebing.cn">kylebing.cn</a></dd>
         </dl>
+        <dl class="copyright-item">
+            <dt>版本：</dt>
+            <dd>v1.00</dd>
+        </dl>
     </div>
 </template>
 
@@ -32,6 +36,7 @@ export default {
 }
 
 dl.copyright-item{
+    margin: 0;
     font-size: 10px;
     color: $text-subtitle;
     display: flex;
