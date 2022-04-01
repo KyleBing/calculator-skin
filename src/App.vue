@@ -36,15 +36,11 @@ export default {
             try {
                 let result = calculator.evaluate(this.equation)
                 if (this.equation !== ''){
-                    if (typeof(result) === 'string' ){
-                        this.result = '输入有误'
-                    } else {
-                        this.result = String(result)
-                        // this.result = result.toFixed(2)
-                    }
+                    this.result = String(result)
+                    // this.result = result.toFixed(2)
                 }
             } catch (error) {
-                this.result = '输入有误'
+                this.result = ''
             }
         },
         // 添加结果到结果集
@@ -76,10 +72,7 @@ export default {
     },
     watch: {
         equation(newValue){
-            if (this.equationIsValid(newValue)){
-                console.log('valid equation', newValue)
-                this.calculate()
-            }
+            this.calculate()
             if (newValue === ''){
                 this.result = ''
             }
