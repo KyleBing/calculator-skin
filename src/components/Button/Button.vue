@@ -1,5 +1,5 @@
 <template>
-    <div class="btn" :style="`width: ${width}px`">
+    <div :class="btnClass" :style="`width: ${width}px`">
         <img :alt="type" :src="icon" />
     </div>
 </template>
@@ -18,12 +18,20 @@ export default {
             default: 30
         }
     },
-    mounted() {
-
-    },
+    mounted() {},
     computed: {
         icon(){
             return SvgIcons[this.type]
+        },
+        btnClass(){
+            let btnMap = new Map([
+                ['edit', 'green'],
+                ['delete', 'red'],
+                ['close', 'red'],
+                ['copy', 'blue'],
+                ['share', 'blue'],
+            ])
+            return ['btn', btnMap.get(this.type)]
         }
     }
 }
@@ -31,20 +39,51 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/scss/plugin";
+
+$width-btn: 26px;
 .btn{
-    //border: 1px solid #888;
-    @include border-radius(30px);
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: $width-btn;
+    height: $width-btn;
+    @include border-radius($width-btn);
     overflow: hidden;
-    padding: 0;
-    background: linear-gradient(to bottom, #888, #666);
-    //background-color: #888;
+    padding: 2px;
+    background-color: transparentize(black, 0.8);
     @extend .btn-like;
     img{
         display: block;
         width: 100%;
+        height: 100%;
     }
-    &:hover{
-        background: linear-gradient(to top, $magenta, lighten($magenta, 10%));
+    &.red{
+        @include transition(background 0.3s);
+        &:hover{
+            @include transition(background 0.1s);
+            background: $red;
+        }
     }
+    &.green{
+        @include transition(background 0.3s);
+        &:hover{
+            @include transition(background 0.1s);
+            background: $green;
+        }
+    }
+    &.blue{
+        @include transition(background 0.3s);
+        &:hover{
+            @include transition(background 0.1s);
+            background: $blue;
+        }
+    }
+    &.orange{
+        @include transition(background 0.3s);
+        &:hover{
+            @include transition(background 0.1s);
+            background: $orange;
+        }
+    }
+
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <Display class="mb-2" :equation="equation" :result="result"/>
-        <div class="equation mb-2">
+<!--        <Display class="mb-2" :equation="equation" :result="result"/>-->
+        <div class="equation-input mb-2">
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
         </div>
         <ResultList :resultList="resultList" @edit="editResultAt" @delete="deleteResultAt"/>
@@ -98,21 +98,22 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "src/assets/scss/gutter";
-@import "src/assets/scss/plugin";
+<style lang="scss">
+@import "assets/scss/calculator";
+
 
 .container{
-    font-family: Verdana;
+    font-family: 'Verdana';
     padding: 30px;
 }
 
-.equation{
+.equation-input{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: row nowrap;
     input{
+        font-family: 'Verdana';
         width: 100%;
         display: block;
         text-align: center;
@@ -121,15 +122,12 @@ export default {
         border: 3px solid $color-border;
         @include border-radius(5px);
         outline: none;
+        @include transition(all 0.3s);
         &:focus{
+            @include transition(all 0.3s);
             border-color: $color-border-highlight;
         }
     }
 }
-.btn{
-    @include border-radius(5px);
-    padding: 3px 5px;
-    border: 1px solid $color-border;
-    @extend .btn-like
-}
+
 </style>

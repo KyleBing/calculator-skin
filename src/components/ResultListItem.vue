@@ -7,7 +7,7 @@
             <div class="operations">
                 <Button type="edit" @click="$emit('edit', index)"/>
                 <Button type="close" @click="$emit('delete', index)"/>
-                <Button class="clipboard" type="share" :dataClipboard="resultItem.result"/>
+                <Button type="share" class="clipboard"  :dataClipboard="resultItem.result"/>
             </div>
         </div>
     </div>

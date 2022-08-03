@@ -50,7 +50,7 @@ export default {
     display: flex;
     .equal{
         padding-right: 50px;
-        color: $text-comment;
+        color: $text-main;
     }
     .result{
     }
