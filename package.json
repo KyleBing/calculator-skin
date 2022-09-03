@@ -10,6 +10,7 @@
     "advanced-calculator": "^1.1.0",
     "clipboard": "^2.0.10",
     "filemanager-webpack-plugin": "^6.1.7",
+    "moment": "^2.29.4",
     "register-service-worker": "^1.7.1",
     "vue": "^3.0.0"
   },

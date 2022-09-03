@@ -1,4 +1,5 @@
 const FileManagerPlugin = require('filemanager-webpack-plugin')
+const Moment = require('moment')
 
 module.exports = {
     publicPath: './',
@@ -6,9 +7,9 @@ module.exports = {
 
     outputDir: '../calculator',
 
-
     configureWebpack: config => {
-        if (process.env.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === 'production'){
+            let packTimeString = new Moment().format('YYYY-MM-DD') // 打包时间
             let plugins = []
             plugins.push(
                 new FileManagerPlugin({
@@ -18,9 +19,14 @@ module.exports = {
                             archive: [
                                 // 打包 压缩包中不带 dist 外壳
                                 {
-                                    source: './dist/',
-                                    destination: './archive/calculator.zip',
-                                    options: {}
+                                    source: '../calculator',
+                                    destination: `./archive/calculator-${packTimeString}.zip`,
+                                    format: 'zip',
+                                    options: {
+                                        gzipOptions: {
+                                            level: 1,
+                                        },
+                                    }
                                 },
                             ]
                         }
