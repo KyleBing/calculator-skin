@@ -69,9 +69,9 @@ export default {
         .note{
             padding: 5px 10px;
             font-size: $font-size-comment;
-            color: $text-comment;
+            color: $text-main;
             &:hover{
-                color: $text-main;
+                font-weight: bold;
             }
         }
         .note-input{

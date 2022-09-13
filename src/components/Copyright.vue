@@ -6,14 +6,20 @@
         </dl>
         <dl class="copyright-item">
             <dt>版本：</dt>
-            <dd>v1.00</dd>
+            <dd>{{version}}</dd>
         </dl>
     </div>
 </template>
 
 <script>
+import projectConfig from '@/../package.json'
 export default {
     name: "Copyright",
+    data(){
+        return {
+            version: projectConfig.version
+        }
+    },
     props:{
         result: {
             type: String,

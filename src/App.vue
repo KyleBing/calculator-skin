@@ -3,7 +3,7 @@
 <!--        <Display class="mb-2" :equation="equation" :result="result"/>-->
         <div class="equation-input mb-2">
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
-            <div class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
+            <div v-if="equation" class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
         </div>
         <div class="calculator-container">
             <ResultList :resultList="resultList"
@@ -138,13 +138,16 @@ export default {
         text-align: center;
         font-size: 30px;
         padding: 10px 20px;
-        border: 3px solid $color-border;
+        border: 2px solid $color-border;
         @include border-radius(5px);
         outline: none;
+        background-color: #fafafa;
         @include transition(all 0.3s);
         &:focus{
+            outline: 4px solid transparentize($blue, 0.9);
             @include transition(all 0.3s);
-            border-color: $color-border-highlight;
+            border: 2px solid transparentize($blue, 0.3);
+            background-color: transparentize($blue, 0.98);
         }
     }
     .btn-clear{
