@@ -67,9 +67,12 @@ export default {
             //flex-grow: 1;
         }
         .note{
-            margin-left: 10px;
+            padding: 5px 10px;
             font-size: $font-size-comment;
             color: $text-comment;
+            &:hover{
+                color: $text-main;
+            }
         }
         .note-input{
             font-size: $font-size-comment;

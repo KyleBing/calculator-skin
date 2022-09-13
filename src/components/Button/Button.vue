@@ -50,7 +50,8 @@ $width-btn: 26px;
     @include border-radius($width-btn);
     overflow: hidden;
     padding: 2px;
-    background-color: transparentize(black, 0.9);
+    border: 1px solid transparentize(black, 0.95);
+    background-color: transparentize(black, 0.95);
     @extend .btn-like;
     img{
         display: block;

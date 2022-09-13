@@ -150,7 +150,10 @@ export default {
     .btn-clear{
         position: absolute;
         right: 30px;
-        top: 10px;
+        top: 15px;
+        &:hover{
+            background-color: transparentize($red, 0.6);
+        }
     }
 }
 
