@@ -1,10 +1,14 @@
 <template>
-    <ResultListItem :resultItem="item"
-                    :index="index"
-                    v-for="(item, index) in resultList" :key="index"
-                    @delete="deleteResultAt(index)"
-                    @edit="editResultAt(index)"
-    />
+    <div class="result-list">
+        <ResultListItem :resultItem="item"
+                        :index="index"
+                        v-for="(item, index) in resultList" :key="index"
+                        @delete="deleteResultAt(index)"
+                        @edit="editResultAt(index)"
+                        @note="noteResultAt(index)"
+                        @noteConfirm="noteConfirmAt(index)"
+        />
+    </div>
 </template>
 
 <script>
@@ -18,13 +22,19 @@ export default {
             default: []
         }
     },
-    emits: ['delete', 'edit'],
+    emits: ['delete', 'edit', 'note', 'noteConfirm'],
     methods: {
         deleteResultAt(index){
             this.$emit('delete', index)
         },
         editResultAt(index){
             this.$emit('edit', index)
+        },
+        noteResultAt(index){
+            this.$emit('note', index)
+        },
+        noteConfirmAt(index){
+            this.$emit('noteConfirm', index)
         }
     }
 }
@@ -32,5 +42,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/assets/scss/plugin";
+.result-list{
+    margin-top: 20px;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
 
 </style>

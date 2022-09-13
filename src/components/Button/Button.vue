@@ -37,11 +37,12 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "../../assets/scss/plugin";
 
 $width-btn: 26px;
 .btn{
+    user-select: none;
     flex-grow: 0;
     flex-shrink: 0;
     width: $width-btn;
@@ -49,7 +50,7 @@ $width-btn: 26px;
     @include border-radius($width-btn);
     overflow: hidden;
     padding: 2px;
-    background-color: transparentize(black, 0.8);
+    background-color: transparentize(black, 0.9);
     @extend .btn-like;
     img{
         display: block;
@@ -60,30 +61,29 @@ $width-btn: 26px;
         @include transition(background 0.3s);
         &:hover{
             @include transition(background 0.1s);
-            background: $red;
+            background: transparentize($red, 0.2);
         }
     }
     &.green{
         @include transition(background 0.3s);
         &:hover{
             @include transition(background 0.1s);
-            background: $green;
+            background: transparentize($green, 0.2);
         }
     }
     &.blue{
         @include transition(background 0.3s);
         &:hover{
             @include transition(background 0.1s);
-            background: $blue;
+            background: transparentize($blue, 0.2);
         }
     }
     &.orange{
         @include transition(background 0.3s);
         &:hover{
             @include transition(background 0.1s);
-            background: $orange;
+            background: transparentize($orange, 0.2);
         }
     }
-
 }
 </style>

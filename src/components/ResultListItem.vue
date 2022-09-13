@@ -9,6 +9,13 @@
                 <Button type="close" @click="$emit('delete', index)"/>
                 <Button type="share" class="clipboard"  :dataClipboard="resultItem.result"/>
             </div>
+            <input v-if="resultItem.isEditing"
+                   @keydown.enter="$emit('noteConfirm', index)"
+                   v-model="resultItem.note" class="note-input" type="text">
+            <div v-else
+                 class="note"
+                 @click="$emit('note', index)"
+            >{{resultItem.note || ''}}</div>
         </div>
     </div>
 </template>
@@ -25,7 +32,7 @@ export default {
             required: true
         }
     },
-    emits: ['delete', 'edit']
+    emits: ['delete', 'edit', 'note', 'noteConfirm'],
 }
 </script>
 
@@ -51,12 +58,28 @@ export default {
         flex-shrink: 0;
         display: flex;
         justify-content: flex-start;
+        align-items: center;
         .equal{
             color: $blue;
             padding-right: 50px;
         }
         .result{
             //flex-grow: 1;
+        }
+        .note{
+            margin-left: 10px;
+            font-size: $font-size-comment;
+            color: $text-comment;
+        }
+        .note-input{
+            font-size: $font-size-comment;
+            padding: 5px 10px;
+            @include border-radius(3px);
+            outline: none;
+            border: 1px solid $color-border;
+            &:focus{
+                border-color: $color-border-highlight;
+            }
         }
     }
 }

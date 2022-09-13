@@ -3,9 +3,17 @@
 <!--        <Display class="mb-2" :equation="equation" :result="result"/>-->
         <div class="equation-input mb-2">
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
+            <div class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
         </div>
-        <ResultList :resultList="resultList" @edit="editResultAt" @delete="deleteResultAt"/>
-        <Copyright/>
+        <div class="calculator-container">
+            <ResultList :resultList="resultList"
+                        @edit="editResultAt"
+                        @delete="deleteResultAt"
+                        @noteConfirm="noteConfirmAt"
+                        @note="noteResultAt"/>
+            <Copyright/>
+        </div>
+
     </div>
 </template>
 
@@ -32,10 +40,12 @@ export default {
         // 计算结果
         calculate(){
             this.equation = this.equation.replaceAll(/[xX]/g,'*')
+            this.equation = this.equation.replaceAll(/[cC]/g,'/')
+            this.equation = this.equation.replaceAll(/[jJ]/g,'+')
             // console.log('---about to execute calculation: ', this.equation)
             try {
-                let result = calculator.evaluate(this.equation)
                 if (this.equation !== ''){
+                    let result = calculator.evaluate(this.equation)
                     this.result = String(result)
                     // this.result = result.toFixed(2)
                 }
@@ -45,12 +55,14 @@ export default {
         },
         // 添加结果到结果集
         addResult(){
-            if (this.equation && this.result && this.equationIsValid(this.equation)){
+            if (this.equation && this.result){
                 this.resultList.unshift({
                     date: new Date(),
-                    equation: this.equation.replaceAll(' ','').replaceAll(/([\+\-\(\)])/g, ' $1 '),
-                    // equation: this.equation.replaceAll(' ','').replaceAll(/([\+\-\/\*\(\)])/g, ' $1 '),
+                    // equation: this.equation.replaceAll(' ','').replaceAll(/([\+\-\(\)\/])/g, ' $1 '),
+                    equation: this.equation.replaceAll(' ',''),
                     result: this.result,
+                    isEditing: false,
+                    note: '备注'
                 })
             }
         },
@@ -64,10 +76,16 @@ export default {
             let editResult = this.resultList[index]
             this.equation = editResult.equation
         },
-
-        // 验证算式是否可用
-        equationIsValid(equation){
-            return /^[\.\d].*\d+ *\)?$/i.test(equation)
+        noteResultAt(index){
+            let editResult = this.resultList[index]
+            editResult.isEditing = true
+        },
+        noteConfirmAt(index){
+            let editResult = this.resultList[index]
+            editResult.isEditing = false
+        },
+        clearInput(){
+            this.equation = ''
         }
     },
     watch: {
@@ -108,6 +126,7 @@ export default {
 }
 
 .equation-input{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -128,6 +147,16 @@ export default {
             border-color: $color-border-highlight;
         }
     }
+    .btn-clear{
+        position: absolute;
+        right: 30px;
+        top: 10px;
+    }
+}
+
+.calculator-container{
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 </style>
