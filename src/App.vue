@@ -26,6 +26,8 @@ import Button from "@/components/Button/Button";
 import ClipboardJS from "clipboard";
 import Copyright from "@/components/Copyright";
 
+const RESULT_STORE_IDENTIFIER = 'CalculatorResultList'
+
 export default {
     name: 'App',
     components: {Copyright, Button, ResultList, Display },
@@ -36,6 +38,7 @@ export default {
             resultList: [], // 计算结果保存列表
         }
     },
+
     methods: {
         // 计算结果
         calculate(){
@@ -94,10 +97,24 @@ export default {
             if (newValue === ''){
                 this.result = ''
             }
+        },
+        resultList: {
+            deep: true,
+            handler(newValue){
+                localStorage.setItem(RESULT_STORE_IDENTIFIER, JSON.stringify(this.resultList))
+            }
         }
     },
 
     mounted() {
+        // 读取保存的数据
+        let lastResultListString = localStorage.getItem(RESULT_STORE_IDENTIFIER)
+        if (lastResultListString){
+            this.resultList = JSON.parse(lastResultListString)
+        } else {
+            this.resultList = []
+        }
+
         // 绑定剪贴板操作方法
         this.clipboard = new ClipboardJS('.clipboard', {
             text: function (trigger) {
