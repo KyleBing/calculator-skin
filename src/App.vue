@@ -1,16 +1,37 @@
 <template>
     <div class="container">
 <!--        <Display class="mb-2" :equation="equation" :result="result"/>-->
+
+        <div class="input-group-list">
+            <h3>结果四舍五入</h3>
+            <div class="input-group">
+                <input v-model="accuracy" id="round0" :value="0" name="round" type="radio"/>
+                <label for="round0">整数</label>
+            </div>
+            <div class="input-group">
+                <input v-model="accuracy" id="round1" :value="1" name="round" type="radio"/>
+                <label for="round1">一位小数</label>
+            </div>
+            <div class="input-group">
+                <input v-model="accuracy" id="round2" :value="2" name="round" type="radio"/>
+                <label for="round2">两位小数</label>
+            </div>
+            <div class="input-group">
+                <input v-model="accuracy" id="roundNull" value="" name="round" type="radio"/>
+                <label for="roundNull">不处理</label>
+            </div>
+        </div>
         <div class="equation-input mb-2">
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
             <div v-if="equation" class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
         </div>
         <div class="calculator-container">
-            <ResultList :resultList="resultList"
-                        @edit="editResultAt"
-                        @delete="deleteResultAt"
-                        @noteConfirm="noteConfirmAt"
-                        @note="noteResultAt"/>
+            <ResultList
+                :resultList="resultList"
+                @edit="editResultAt"
+                @delete="deleteResultAt"
+                @noteConfirm="noteConfirmAt"
+                @note="noteResultAt"/>
             <Copyright/>
         </div>
 
@@ -36,6 +57,7 @@ export default {
             equation: '', // 算式
             result: '', // 计算结果,
             resultList: [], // 计算结果保存列表
+            accuracy: 2, // 精度
         }
     },
 
@@ -49,8 +71,12 @@ export default {
             try {
                 if (this.equation !== ''){
                     let result = calculator.evaluate(this.equation)
-                    this.result = String(result)
-                    // this.result = result.toFixed(2)
+                    // this.result = String(result)
+                    if (this.accuracy !== ''){
+                        this.result = Number(result.toFixed(this.accuracy))
+                    } else {
+                        this.result = result
+                    }
                 }
             } catch (error) {
                 this.result = ''
@@ -58,6 +84,10 @@ export default {
         },
         // 添加结果到结果集
         addResult(){
+            this.calculate()
+            if (this.equation === ''){
+                this.result = ''
+            }
             if (this.equation && this.result){
                 this.resultList.unshift({
                     date: new Date(),
@@ -93,10 +123,7 @@ export default {
     },
     watch: {
         equation(newValue){
-            this.calculate()
-            if (newValue === ''){
-                this.result = ''
-            }
+
         },
         resultList: {
             deep: true,
@@ -180,6 +207,16 @@ export default {
 .calculator-container{
     display: flex;
     flex-flow: row nowrap;
+}
+
+.input-group-list{
+    align-items: center;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    .input-group{
+        margin-right: 10px;
+    }
 }
 
 </style>
