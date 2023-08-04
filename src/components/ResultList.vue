@@ -43,7 +43,6 @@ export default {
 <style lang="scss" scoped>
 @import "src/assets/scss/plugin";
 .result-list{
-    margin-top: 20px;
     flex-shrink: 0;
     flex-grow: 1;
 }

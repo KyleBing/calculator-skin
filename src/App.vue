@@ -25,7 +25,11 @@
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
             <div v-if="equation" class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
         </div>
+        <div class="operate-button-wrapper">
+            <div class="clear-button" @click="clearHistory">清空列表</div>
+        </div>
         <div class="calculator-container">
+
             <ResultList
                 :resultList="resultList"
                 @edit="editResultAt"
@@ -81,6 +85,10 @@ export default {
             } catch (error) {
                 this.result = ''
             }
+        },
+        // 清空历史记录
+        clearHistory(){
+            this.resultList = []
         },
         // 添加结果到结果集
         addResult(){
@@ -207,6 +215,23 @@ export default {
 .calculator-container{
     display: flex;
     flex-flow: row nowrap;
+}
+
+
+.operate-button-wrapper{
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .clear-button{
+        text-align: center;
+        cursor: pointer;
+        font-size: $font-size-text;
+        color: $color-subtitle;
+        &:hover{
+            color: $color-main;
+        }
+    }
 }
 
 .input-group-list{
