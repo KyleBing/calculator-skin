@@ -1,6 +1,7 @@
 {
   "name": "calculator-skin",
   "version": "0.1.2",
+  "update-date": "2023-08-05",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
