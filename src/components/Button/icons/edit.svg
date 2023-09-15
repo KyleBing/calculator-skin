@@ -1,9 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
-    <title>web / tabicon / edit</title>
-    <desc>Created with Sketch.</desc>
-    <g id="web-/-tabicon-/-edit" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <path d="M20,11.8 C20,10.8058875 20.8058875,10 21.8,10 L23.2,10 C24.1941125,10 25,10.8058875 25,11.8 L25,31.7913009 L23.3606257,37.1499157 C23.2731316,37.4359074 23.049285,37.6597539 22.7632934,37.7472481 C22.2879829,37.892661 21.7847872,37.6252262 21.6393743,37.1499157 L21.6393743,37.1499157 L20,31.7913009 L20,11.8 Z" id="Combined-Shape" stroke="#666666" stroke-width="2" transform="translate(22.500000, 24.000000) rotate(45.000000) translate(-22.500000, -24.000000) "></path>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><defs><style>.cls-1{fill:none;}</style></defs><title>edit</title><g id="图层_2" data-name="图层 2"><g id="图层_1-2" data-name="图层 1"><g id="edit"><rect class="cls-1" width="50" height="50"/><path d="M16.22,30.79l17.9-17.9a1.3,1.3,0,0,1,1.86,0L37.11,14a1.3,1.3,0,0,1,0,1.86l-17.9,17.9a9.34,9.34,0,0,1-2.29,1.7l-3.68,2a.5.5,0,0,1-.68-.68l2-3.68A9.34,9.34,0,0,1,16.22,30.79Z"/></g></g></g></svg>

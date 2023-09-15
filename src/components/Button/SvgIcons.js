@@ -9,7 +9,7 @@ export default {
     recover     : require('./icons/recover.svg'),
     search      : require('./icons/search.svg'),
     share       : require('./icons/share.svg'),
-    copy        : require('./icons/clipboard.svg'),
     contentHide : require('./icons/eye-close.svg'),
     contentShow : require('./icons/eye-open.svg'),
+    copy        : require('./icons/copy.svg'),
 }

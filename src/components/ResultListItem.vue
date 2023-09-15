@@ -6,8 +6,8 @@
             <div class="result">{{resultItem.result}}</div>
             <div class="operations">
                 <Button type="edit" @click="$emit('edit', index)"/>
-                <Button type="close" @click="$emit('delete', index)"/>
-                <Button type="share" class="clipboard"  :dataClipboard="resultItem.result"/>
+                <Button type="delete" @click="$emit('delete', index)"/>
+                <Button type="copy" class="clipboard"  :dataClipboard="resultItem.result"/>
             </div>
             <input v-if="resultItem.isEditing"
                    @keydown.enter="$emit('noteConfirm', index)"
@@ -64,6 +64,7 @@ export default {
             padding-right: 50px;
         }
         .result{
+            width: 20%;
             //flex-grow: 1;
         }
         .note{
