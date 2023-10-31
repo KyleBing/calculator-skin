@@ -19,8 +19,13 @@ if (process.env.NODE_ENV === 'production') {
     updatefound () {
       console.log('New content is downloading.')
     },
-    updated () {
-      console.log('New content is available; please refresh.')
+    updated (registration) {
+      if (registration.waiting) {
+        registration.waiting.postMessage({
+          type: 'SKIP_WAITING'
+        })
+      }
+      console.log('新的 ServiceWorker.js 已经下载并安装')
     },
     offline () {
       console.log('No internet connection found. App is running in offline mode.')
