@@ -25,8 +25,9 @@
             <input @keydown.enter="addResult" placeholder="请输入算式" v-model="equation"/>
             <div v-if="equation" class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
         </div>
-        <div class="operate-button-wrapper">
+        <div class="tip-wrapper">
             <div class="clear-button" @click="clearHistory">清空列表</div>
+            <div class="tip">{{ errTip }}</div>
         </div>
         <div class="calculator-container">
 
@@ -62,6 +63,8 @@ export default {
             result: '', // 计算结果,
             resultList: [], // 计算结果保存列表
             accuracy: 2, // 精度
+
+            errTip: '', // 错误提示
         }
     },
 
@@ -71,6 +74,8 @@ export default {
             this.equation = this.equation.replaceAll(/[xX]/g,'*')
             this.equation = this.equation.replaceAll(/[cC]/g,'/')
             this.equation = this.equation.replaceAll(/[jJ]/g,'+')
+            this.equation = this.equation.replaceAll(/[\[（]/g,'(')
+            this.equation = this.equation.replaceAll(/[\]）]/g,')')
             // console.log('---about to execute calculation: ', this.equation)
             try {
                 if (this.equation !== ''){
@@ -81,9 +86,12 @@ export default {
                     } else {
                         this.result = result
                     }
+                    this.errTip = ''
                 }
             } catch (error) {
+                console.log(error)
                 this.result = ''
+                this.errTip = '请检查算式'
             }
         },
         // 清空历史记录
@@ -131,7 +139,6 @@ export default {
     },
     watch: {
         equation(newValue){
-
         },
         resultList: {
             deep: true,
@@ -218,11 +225,14 @@ export default {
 }
 
 
-.operate-button-wrapper{
+.tip-wrapper{
     padding: 10px;
     display: flex;
     width: 100%;
     justify-content: center;
+    align-content: center;
+    flex-flow: column nowrap;
+    text-align: center;
     .clear-button{
         text-align: center;
         cursor: pointer;
@@ -231,6 +241,10 @@ export default {
         &:hover{
             color: $color-main;
         }
+    }
+    .tip{
+        font-size: $font-size-text;
+        color: $color-main;
     }
 }
 
