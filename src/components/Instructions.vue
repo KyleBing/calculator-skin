@@ -10,7 +10,7 @@
             <tbody>
                 <tr><td>j</td><td>加号 +</td></tr>
                 <tr><td>x</td><td>乘号 *</td></tr>
-                <tr><td>c</td><td>乘号 ÷</td></tr>
+                <tr><td>c</td><td>除号 ÷</td></tr>
                 <tr><td>[]</td><td>括号 ()</td></tr>
             </tbody>
         </table>
