@@ -37,7 +37,12 @@
                 @delete="deleteResultAt"
                 @noteConfirm="noteConfirmAt"
                 @note="noteResultAt"/>
-            <Copyright/>
+
+            <div class="corner">
+                <Instructions/>
+                <Copyright/>
+            </div>
+
         </div>
 
     </div>
@@ -51,12 +56,13 @@ import ResultList from "@/components/ResultList";
 import Button from "@/components/Button/Button";
 import ClipboardJS from "clipboard";
 import Copyright from "@/components/Copyright";
+import Instructions from "@/components/Instructions.vue";
 
 const RESULT_STORE_IDENTIFIER = 'CalculatorResultList'
 
 export default {
     name: 'App',
-    components: {Copyright, Button, ResultList, Display },
+    components: {Instructions, Copyright, Button, ResultList, Display },
     data(){
         return {
             equation: '', // 算式
@@ -258,4 +264,10 @@ export default {
     }
 }
 
+
+.corner{
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+}
 </style>

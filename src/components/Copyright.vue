@@ -36,9 +36,7 @@ export default {
 <style scoped lang="scss">
 @import "src/assets/scss/plugin";
 .copyright{
-    position: fixed;
-    bottom: 10px;
-    left: 20px;
+
 }
 
 dl.copyright-item{
