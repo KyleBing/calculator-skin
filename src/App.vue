@@ -193,7 +193,7 @@ export default {
 
 
 .container{
-    font-family: 'Verdana';
+    font-family: 'Verdana', "PingFang SC", "Microsoft Yahei UI", "Microsoft Yahei", "Helvetica", sans-serif, sans-serif;
     padding: 30px;
 }
 
@@ -204,7 +204,7 @@ export default {
     justify-content: center;
     flex-flow: row nowrap;
     input{
-        font-family: 'Verdana';
+        font-family: 'Verdana', "PingFang SC", "Microsoft Yahei UI", "Microsoft Yahei", "Helvetica", sans-serif, sans-serif;
         width: 100%;
         display: block;
         text-align: center;
