@@ -15,6 +15,7 @@
             </tbody>
         </table>
         <p>比如 3x4j45x[5j6]c6 就会变成 3×4+45×(5+6)÷6</p>
+        <button @click="hideInstruction">隐藏</button>
     </div>
 </template>
 
@@ -28,6 +29,7 @@ export default {
             version: projectConfig.version
         }
     },
+    emits: ['visibilityUpdate'],
     props:{
         result: {
             type: String,
@@ -36,6 +38,12 @@ export default {
         equation: {
             type: String,
             default: ''
+        }
+    },
+    methods:{
+        hideInstruction(){
+            localStorage.setItem('HIDE_INSTRUCTION', 1)
+            this.$emit('visibilityUpdate')
         }
     }
 }

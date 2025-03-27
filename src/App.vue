@@ -26,7 +26,7 @@
             <div v-if="equation" class="btn-clear btn" @click="clearInput"><img src="./components/Button/icons/close.svg" alt="清空"></div>
         </div>
         <div class="tip-wrapper">
-            <div class="clear-button" @click="clearHistory">清空列表</div>
+            <div class="clear-button" v-if="resultList.length > 0" @click="clearHistory">清空列表</div>
             <div class="tip">{{ errTip }}</div>
         </div>
         <div class="calculator-container">
@@ -39,7 +39,7 @@
                 @note="noteResultAt"/>
 
             <div class="corner">
-                <Instructions/>
+                <Instructions v-if="isShowInstruction" @visibility-update="refreshInstructionVisibility"/>
                 <Copyright/>
             </div>
 
@@ -71,6 +71,7 @@ export default {
             accuracy: 2, // 精度
 
             errTip: '', // 错误提示
+            isShowInstruction: false,  // 显示/隐藏说明
         }
     },
 
@@ -141,6 +142,9 @@ export default {
         },
         clearInput(){
             this.equation = ''
+        },
+        refreshInstructionVisibility(){
+            this.isShowInstruction = !localStorage.getItem('HIDE_INSTRUCTION')
         }
     },
     watch: {
@@ -172,6 +176,9 @@ export default {
         this.clipboard.on('success', ()=>{  // 还可以添加监听事件，如：复制成功后提示
             console.log('copy success')
         })
+
+        // get instruction hide/show config
+        this.refreshInstructionVisibility()
     },
 
     beforeUnmount() {
